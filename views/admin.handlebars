@@ -1,0 +1,32 @@
+<section class="admin">
+    <h1 class="titulo">Confira os agendamentos</h1>
+
+    <table class="tabela">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Data</th>
+                <th>Serviço</th>
+                <th>Horário</th>
+                <th>Operações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each agendamentos}}
+            <tr>
+                <td>{{nome}}</td>
+                <td>{{telefone}}</td>
+                <td>{{data}}</td>
+                <td>{{servico}}</td>
+                <td>{{horario}}</td>
+                <td>
+                    <a href="" class=" btn-excluir">Excluir</a>
+                    <a href="" class=" btn-editar">Editar</a>
+                    <a href="" class=" btn-visualizar">Visualizar</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</section>

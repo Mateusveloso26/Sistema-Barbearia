@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+:root {
+    --light: #fff;
+    --background: #0D121E;
+}
+
+/* PAGINA AGENDAR */
+.agendar {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-agendar {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 600px;
+    background-color: #F0B35B;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 5px double black;
+    border-radius: 16px;
+}
+
+.form-agendar input,
+#horario,
+#servico {
+    width: 60%;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.form-agendar label {
+    color: var(--light);
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.btn-agendamento {
+    cursor: pointer;
+    background-color: #0D121E;
+    color: var(--light);
+}
+
+/* PAGINA ADMIN */
+.admin {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.tabela {
+    background-color: var(--light);
+    margin: 0 50px;
+}
+
+.tabela th,
+.tabela td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.tabela thead {
+    background-color: #F0B35B;
+}
+
+.btn-editar,
+.btn-excluir,
+.btn-visualizar {
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 5px;
+    color: #000;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.btn-excluir {
+    background-color: #e6b570;
+}
+
+.btn-editar {
+    background-color: #e4ab5c;
+}
+
+.btn-visualizar {
+    background-color: #f1a73f;
+}
+
+body {
+    background-color: var(--background);
+    margin: 0;
+}
+
+header {
+    background-image: url("/img/banner.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.logo {
+    height: 80px;
+    margin: 15px 0;
+}
+
+nav {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 20px;
+}
+
+
+nav ul li {
+    list-style-type: none;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--light);
+    text-transform: capitalize;
+    transition: all 0.3s;
+    font-size: 20px;
+    margin: 0 15px;
+}
+
+nav ul li a:hover {
+    color: #adadad;
+}
+
+.header-redes {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-size: 25px;
+    gap: 20px;
+    transition: all 0.5s;
+}
+
+.header-redes i:hover {
+    cursor: pointer;
+    color: #F0B35B;
+}
+
+.header-conteudo {
+    margin: 100px auto;
+    max-width: 400px;
+    justify-content: center;
+    text-align: center;
+}
+
+.header-conteudo h1 {
+    margin-bottom: 10px;
+    color: #fff;
+    display: block;
+}
+
+.header-conteudo p {
+    color: #a5a4a4;
+}
+
+.btn-agendar {
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 20px;
+    background-color: #F0B35B;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-agendar:hover {
+    background-color: #e6b570;
+}
+
+.servicos {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 45px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.titulo {
+    color: var(--light);
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 39px;
+}
+
+.card {
+    background-color: #F0B35B;
+    flex-direction: column;
+    margin: 20px;
+    width: 300px;
+    height: 300px;
+    transition: all 0.3s ease-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.img {
+    width: 100%;
+    height: 85%;
+}
+
+.card-info {
+    text-align: center;
+    font-weight: 700;
+    margin-top: 5px;
+    color: #000;
+}
+
+footer {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 50px;
+    background-color: #080b13
+}
+
+footer p {
+    color: var(--light);
+    font-weight: 500;
+}

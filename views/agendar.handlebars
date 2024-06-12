@@ -1,0 +1,47 @@
+<div class="agendar">
+    <h1 class="titulo">Agendar</h1>
+    <img src="/img/logo-white.svg" alt="" width="100px" style="margin: auto;">
+    <div class="container">
+        <form action="/agendar" method="post" class="form-agendar" id="form-agendar">
+            <input type="text" name="nome" id="nome" placeholder="Nome completo:" required>
+            <input type="tel" name="telefone" id="telefone" placeholder="Telefone:" required>
+            <input type="email" name="email" id="email" placeholder="Email:" required>
+            <label for="data">Data</label>
+            <input type="date" name="data" id="data" required>
+            <label for="horario">Horário </label>
+            <select name="horario" id="horario" required>
+                <option value="08:00">08:00</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+            </select>
+
+            <label for="servico"> Serviços </label required>
+            <select name="servico" id="servico">
+                <option value="corte de cabelo">Corte de cabelo</option>
+                <option value="barba">Barba</option>
+                <option value="combo">Combo</option>
+            </select>
+            <input type="submit" value="Agendar" class="btn-agendamento">
+        </form>
+
+        {{#if sucesso}}
+        <div class="mensagem-sucesso">
+            {{sucesso}}
+        </div>
+        {{/if}}
+
+        {{#if erro}}
+        <div class="mensagem-erro">
+            {{erro}}
+        </div>
+        {{/if}}
+
+    </div>
+</div>
