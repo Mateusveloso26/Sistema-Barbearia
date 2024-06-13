@@ -1,15 +1,14 @@
 <section class="admin">
     <h1 class="titulo">Confira os agendamentos</h1>
-
     <table class="tabela">
         <thead>
             <tr>
-                <th>Nome</th>
-                <th>Telefone</th>
-                <th>Data</th>
-                <th>Serviço</th>
-                <th>Horário</th>
-                <th>Operações</th>
+                <th>Nome:</th>
+                <th>Telefone:</th>
+                <th>Data:</th>
+                <th>Horário:</th>
+                <th>Serviço:</th>
+                <th>Operações:</th>
             </tr>
         </thead>
         <tbody>
@@ -18,14 +17,14 @@
                 <td>{{nome}}</td>
                 <td>{{telefone}}</td>
                 <td>{{data}}</td>
-                <td>{{servico}}</td>
                 <td>{{horario}}</td>
+                <td>{{servico}}</td>
                 <td>
-                    <a href="" class=" btn-excluir">Excluir</a>
-                    <a href="" class=" btn-editar">Editar</a>
-                    <a href="" class=" btn-visualizar">Visualizar</a>
+                    <a href=""><i class="fa-solid fa-pen"></i></a>
+                    <a href="/deletar/{{id}}"><i class="fa-solid fa-trash"></i></a>
                 </td>
             </tr>
+
             {{/each}}
         </tbody>
     </table>

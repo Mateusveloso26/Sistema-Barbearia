@@ -27,6 +27,23 @@ app.get('/login', (req, res) => {
     res.render('login')
 })
 
+
+app.get('/editar/:id', (req, res) => {
+    Agendamento.findByPk(req.params.id)
+        .then(agendamento => {
+            if (agendamento) {
+                res.render('editar', { agendamento: agendamento });
+            } else {
+                res.render('admin', { erro: "Agendamento não encontrado." });
+            }
+        })
+        .catch(error => {
+            res.render('admin', { erro: "Erro ao buscar agendamento: " + error.message });
+        });
+})
+
+
+// LER  NO BANCO DE DADOS
 app.get('/admin', (req, res) => {
     Agendamento.findAll()
         .then(agendamentos => {
@@ -37,20 +54,33 @@ app.get('/admin', (req, res) => {
         });
 });
 
+
+// DELETAR NO BANCO DE DADOS
+app.get('/deletar/:id', function (req, res) {
+    Agendamento.destroy({ where: { 'id': req.params.id } })
+        .then(function () {
+            res.send('Cliente deletado com sucesso')
+
+        }).catch(function (erro) {
+            res.send('Erro ao excluir o cliente')
+        })
+}),
+
+// CRIAR  NO BANCO DE DADOS
 app.post('/agendar', function (req, res) {
     Agendamento.create({
         nome: req.body.nome,
         telefone: req.body.telefone,
-        email: req.body.email,
         data: req.body.data,
         horario: req.body.horario,
         servico: req.body.servico
     }).then(function () {
-        res.render('home', { Sucesso: "Agendamento concluido !" });
+        res.render('/', { Sucesso: "Agendamento concluido !" });
     }).catch(function (erro) {
-        res.render('agendar', { erro: "Erro: Agendamento não concluido - " + erro.message })
+        res.render('/', { erro: "Erro: Agendamento não concluido - " + erro.message })
     })
 })
+
 
 app.listen(PORT, () => {
     console.log(`Servidor funcionado na porta http://localhost:${PORT}`)

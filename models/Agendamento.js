@@ -10,10 +10,6 @@ const Agendamento = db.define('Agendamentos', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     data: {
         type: DataTypes.DATE,
         allowNull: false
