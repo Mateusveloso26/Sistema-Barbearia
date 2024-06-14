@@ -125,7 +125,10 @@
 .tabela thead {
     background-color: #F0B35B;
 }
-
+.tabela input{
+    font-size: 16px;
+    text-align: center;
+}
 td i {
     color: #000;
     font-size: 25px;
@@ -139,6 +142,7 @@ td i {
 td i:hover{
     color: #fff;
 }
+
 
 body {
     background-color: var(--background);

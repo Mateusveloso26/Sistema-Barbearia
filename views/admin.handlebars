@@ -14,17 +14,19 @@
         <tbody>
             {{#each agendamentos}}
             <tr>
-                <td>{{nome}}</td>
-                <td>{{telefone}}</td>
-                <td>{{data}}</td>
-                <td>{{horario}}</td>
-                <td>{{servico}}</td>
+                 <td><input type="text" name="nome" placeholder="Nome" value="{{nome}}"></td>
+                <td><input type="tel" name="telefone" placeholder="Telefone" value="{{telefone}}"></td>
+                <td><input type="date" name="data" value="{{data}}"></td>
+                <td><input type="time" name="horario" value="{{horario}}"></td>
+                <td><input type="text" name="servico" placeholder="Serviço" value="{{servico}}"></td>
+
                 <td>
-                    <a href=""><i class="fa-solid fa-pen"></i></a>
-                    <a href="/deletar/{{id}}"><i class="fa-solid fa-trash"></i></a>
+                    <a href="/atualizar/{{id}}"><i class="fa-solid fa-pen"></i></a>
+                    <a href="/deletar/{{id}}"
+                        onclick="return confirm('Tem certeza que deseja excluir este agendamento?');"><i
+                            class="fa fa-trash"></i></a>
                 </td>
             </tr>
-
             {{/each}}
         </tbody>
     </table>
