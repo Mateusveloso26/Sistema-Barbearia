@@ -64,12 +64,29 @@ app.post('/agendar', function (req, res) {
 app.get('/admin', (req, res) => {
     Agendamento.findAll()
         .then(agendamentos => {
-            res.render('admin', { agendamentos: agendamentos });
+            // Formatar cada data para YYYY-MM-DD
+            const formattedAgendamentos = agendamentos.map(agendamento => {
+                const data = new Date(agendamento.data);
+                data.setMinutes(data.getMinutes() + data.getTimezoneOffset()); // Ajustar fuso horário se necessário
+                const year = data.getFullYear();
+                const month = String(data.getMonth() + 1).padStart(2, '0'); // Mês começa em 0
+                const day = String(data.getDate()).padStart(2, '0');
+                const formattedDate = `${day}/${month}/${year}`;
+
+                // Retornar o objeto agendamento com a data formatada
+                return {
+                    ...agendamento,
+                    data: formattedDate
+                };
+            });
+
+            res.render('admin', { agendamentos: formattedAgendamentos });
         })
         .catch(error => {
             res.render('admin', { erro: "Erro ao buscar agendamentos: " + error.message });
         });
 });
+
 
 // DELETAR NO BANCO DE DADOS
 app.get('/deletar/:id', function (req, res) {
@@ -83,27 +100,9 @@ app.get('/deletar/:id', function (req, res) {
 }),
 
 // ATUALIZAR DADOS NO BANCO DE DADOS
-app.post('/atualizar/:id', (req, res) => {
-    const id = req.params.id;
 
-    Agendamento.findByPk(id).then(agendamento => {
-        if (agendamento) {
-            agendamento.nome = req.body.nome;
-            agendamento.telefone = req.body.telefone;
-            agendamento.data = req.body.data;
-            agendamento.horario = req.body.horario;
-            agendamento.servico = req.body.servico;
-
-            return agendamento.save().then(() => {
-                res.send({ message: 'Agendamento atualizado com sucesso' });
-            });
-        } else {
-            res.send({ message: 'Agendamento não encontrado' });
-        }
-    });
-});
 
 app.listen(PORT, () => {
     console.log(`Servidor funcionado na porta http://localhost:${PORT}`)
     console.log(`Servidor funcionado na porta http://localhost:${PORT}/admin`)
-})
+    })

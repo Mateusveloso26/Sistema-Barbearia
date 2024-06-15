@@ -27,6 +27,7 @@
 .agendar {
     display: flex;
     flex-direction: column;
+    height: auto;
 }
 
 .form-agendar {
@@ -45,7 +46,7 @@
 .form-agendar input,
 #horario,
 #servico {
-    width: 60%;
+    width: 70%;
     margin: 10px 0;
     padding: 10px;
     border-radius: 8px;
@@ -143,6 +144,14 @@ td i:hover{
     color: #fff;
 }
 
+dialog{
+    justify-content: center;
+    margin: auto;
+    padding: 10%;
+    border-radius: 8px;
+    background-color: rgb(214, 214, 214);
+
+}
 
 body {
     background-color: var(--background);
@@ -210,7 +219,7 @@ nav ul li a:hover {
 }
 
 .header-conteudo {
-    margin: 100px auto;
+    margin: 10% auto;
     max-width: 400px;
     justify-content: center;
     text-align: center;
