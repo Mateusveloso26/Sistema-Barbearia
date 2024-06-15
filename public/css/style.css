@@ -18,7 +18,7 @@
     color: var(--light);
     justify-content: center;
     text-align: center;
-    margin: 40px 20px 0 0 ;
+    margin: 20px 20px 0 0;
     font-size: 39px;
     text-transform: uppercase;
 }
@@ -80,30 +80,53 @@
     height: 250px;
     border-radius: 16px;
     justify-content: center;
-    background-color:transparent;
+    background-color: transparent;
     border: 2px solid #F0B35B;
 
 }
-.form-login input{
+
+.form-login input {
     margin: 10px 50px;
     padding: 8px;
     border-radius: 8px;
 
 }
-.form-login label{
-    color: #fff;    
+
+.form-login label {
+    color: #fff;
 }
 
 /* PAGINA ADMIN */
+.header-admin {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 30px;
+}
+
+a .fa-arrow-left {
+    padding: 10px;
+    background-color: #F0B35B;
+    border-radius: 100%;
+}
+
+.fa-arrow-left {
+    font-size: 25px;
+    color: #000000;
+}
+
 .admin {
     display: flex;
     flex-direction: column;
     height: 100vh;
     max-height: auto;
 }
-.admin h1{
+
+.admin h1 {
     margin-bottom: 50px;
 }
+
 .tabela {
     background-color: var(--light);
     margin: 0 60px;
@@ -126,25 +149,28 @@
 .tabela thead {
     background-color: #F0B35B;
 }
-.tabela input{
+
+.tabela input {
     font-size: 16px;
     text-align: center;
 }
+
 td i {
     color: #000;
     font-size: 25px;
-    margin:  5px;
+    margin: 5px;
     border: 2px solid #000000;
     padding: 10px;
     border-radius: 50px;
     transition: all 0.3s;
     background-color: #F0B35B;
 }
-td i:hover{
+
+td i:hover {
     color: #fff;
 }
 
-dialog{
+dialog {
     justify-content: center;
     margin: auto;
     padding: 10%;

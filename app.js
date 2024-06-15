@@ -4,19 +4,8 @@ const dotenv = require('dotenv').config()
 const bodyParser = require('body-parser')
 const app = express()
 const Agendamento = require('./models/Agendamento')
-const session = require('express-session')
-const passport = require('./passportConfig')
-
+const Usuario = require('./models/Usuario')
 const PORT = process.env.PORT || 3002;
-
-app.use(session({ // Configuração do express-session
-    secret: 'your_secret_key', // Substitua por uma chave secreta real
-    resave: false,
-    saveUninitialized: false
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
@@ -24,13 +13,6 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(express.static('public'))
-
-app.post('/login', passport.authenticate('local', {
-    successRedirect: '/admin',
-    failureRedirect: '/login',
-    failureFlash: false
-
-}));
 
 
 app.get('/', (req, res) => {
@@ -45,7 +27,7 @@ app.get('/login', (req, res) => {
 })
 
 
-// CRIAR  NO BANCO DE DADOS
+// CRIAR AGENDAMENTOS NO BANCO DE DADOS
 app.post('/agendar', function (req, res) {
     Agendamento.create({
         nome: req.body.nome,
@@ -60,27 +42,35 @@ app.post('/agendar', function (req, res) {
     })
 })
 
-// LER  NO BANCO DE DADOS
+// CRIAÇÃO DO USUARIO ADMIN
+// Usuario.create({
+//     email: 'admin@gmail.com',
+//     senha: 'barber2024' 
+// }).then(usuario => {
+//     console.log('Usuário criado:', Usuario);
+// }).catch(error => {
+//     console.error('Erro ao criar usuário:', error);
+// })
+
+// LER OS AGENDAMENTOS CRIADOS  NO BANCO DE DADOS
 app.get('/admin', (req, res) => {
     Agendamento.findAll()
         .then(agendamentos => {
-            // Formatar cada data para YYYY-MM-DD
-            const formattedAgendamentos = agendamentos.map(agendamento => {
-                const data = new Date(agendamento.data);
-                data.setMinutes(data.getMinutes() + data.getTimezoneOffset()); // Ajustar fuso horário se necessário
-                const year = data.getFullYear();
-                const month = String(data.getMonth() + 1).padStart(2, '0'); // Mês começa em 0
-                const day = String(data.getDate()).padStart(2, '0');
-                const formattedDate = `${day}/${month}/${year}`;
 
-                // Retornar o objeto agendamento com a data formatada
+            const agendamentosFormatados = agendamentos.map(agendamento => {
+                const data = new Date(agendamento.data);
+                data.setMinutes(data.getMinutes() + data.getTimezoneOffset());
+                const ano = data.getFullYear();
+                const mes = String(data.getMonth() + 1).padStart(2, '0');
+                const dia = String(data.getDate()).padStart(2, '0');
+                const dataFormatada = `${dia}/${mes}/${ano}`;
                 return {
                     ...agendamento,
-                    data: formattedDate
+                    data: dataFormatada
                 };
             });
 
-            res.render('admin', { agendamentos: formattedAgendamentos });
+            res.render('admin', { agendamentos: agendamentosFormatados });
         })
         .catch(error => {
             res.render('admin', { erro: "Erro ao buscar agendamentos: " + error.message });
@@ -88,7 +78,7 @@ app.get('/admin', (req, res) => {
 });
 
 
-// DELETAR NO BANCO DE DADOS
+// DELETAR AGENDAMENTOS NO BANCO DE DADOS
 app.get('/deletar/:id', function (req, res) {
     Agendamento.destroy({ where: { id: req.params.id } })
         .then(function () {
@@ -99,10 +89,11 @@ app.get('/deletar/:id', function (req, res) {
         })
 }),
 
-// ATUALIZAR DADOS NO BANCO DE DADOS
+// ATUALIZAR AGENDAMENTOS DO BANCO DE DADOS
 
+    
 
-app.listen(PORT, () => {
-    console.log(`Servidor funcionado na porta http://localhost:${PORT}`)
-    console.log(`Servidor funcionado na porta http://localhost:${PORT}/admin`)
+    app.listen(PORT, () => {
+        console.log(`Servidor funcionado na porta http://localhost:${PORT}`)
+        console.log(`Servidor funcionado na porta http://localhost:${PORT}/admin`)
     })
