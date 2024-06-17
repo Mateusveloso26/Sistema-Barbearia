@@ -1,0 +1,29 @@
+<section class="editar">
+    <div class="header-admin">
+        <a href="/admin"><i class="fa-solid fa-arrow-left"></i></a>
+        <a href="/"><img src="/img/logo-white.svg" alt="Logo da barbearia" width="80px" ;></a>
+    </div>
+
+    <form action="/editar/{{agendamento.id}}" method="POST" class="form-editar">
+        <h2>Editar Dados</h2>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" value="{{agendamento.nome}}" required>
+
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" name="telefone" value="{{agendamento.telefone}}" required>
+
+        <label for="data">Data:</label>
+        <input type="date" id="data" name="data" value="{{agendamento.data}}" required>
+
+        <label for="horario">Horário:</label>
+        <input type="time" id="horario" name="horario" value="{{agendamento.horario}}" required>
+
+        <label for="servico">Serviço:</label>
+        <select name="servico" id="servico" value="{{agendamento.horario}}" required>
+            <option value="corte de cabelo">Corte de cabelo</option>
+            <option value="barba">Barba</option>
+            <option value="combo">Combo</option>
+        </select>
+        <button class="btn-editar" type="submit">Salvar</button>
+    </form>
+</section>

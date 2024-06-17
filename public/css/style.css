@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Freeman&display=swap');
 
 * {
     padding: 0;
@@ -10,15 +11,19 @@
 }
 
 :root {
+    --background: #1e1e20;
+    --background1: rgb(19, 19, 19);
+    --secundario: #eb9c2d;
+    --secundario-1: #e7ab57;
     --light: #fff;
-    --background: #0D121E;
+
 }
 
 .titulo {
     color: var(--light);
     justify-content: center;
     text-align: center;
-    margin: 20px 20px 0 0;
+    margin: 20px 40px 0 0;
     font-size: 39px;
     text-transform: uppercase;
 }
@@ -28,6 +33,7 @@
     display: flex;
     flex-direction: column;
     height: auto;
+    min-height: 100vh;
 }
 
 .form-agendar {
@@ -39,13 +45,13 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    border: 2px solid #F0B35B;
+    border: 2px outset var(--secundario);
     border-radius: 16px;
 }
 
 .form-agendar input,
-#horario,
-#servico {
+.horario,
+.servico {
     width: 70%;
     margin: 10px 0;
     padding: 10px;
@@ -54,131 +60,26 @@
 
 .form-agendar label {
     color: var(--light);
-    margin-top: 10px;
+    margin-top: 5px;
     font-weight: bold;
 }
 
 .btn-agendamento {
     cursor: pointer;
-    background-color: #080b13;
-    color: var(--light);
-}
-
-/* PAGINA LOGIN  */
-.login {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    text-align: center;
-}
-
-.form-login {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    margin: auto;
-    height: 250px;
-    border-radius: 16px;
-    justify-content: center;
-    background-color: transparent;
-    border: 2px solid #F0B35B;
-
-}
-
-.form-login input {
-    margin: 10px 50px;
-    padding: 8px;
-    border-radius: 8px;
-
-}
-
-.form-login label {
-    color: #fff;
-}
-
-/* PAGINA ADMIN */
-.header-admin {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 30px;
-}
-
-a .fa-arrow-left {
-    padding: 10px;
-    background-color: #F0B35B;
-    border-radius: 100%;
-}
-
-.fa-arrow-left {
-    font-size: 25px;
-    color: #000000;
-}
-
-.admin {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    max-height: auto;
-}
-
-.admin h1 {
-    margin-bottom: 50px;
-}
-
-.tabela {
-    background-color: var(--light);
-    margin: 0 60px;
-}
-
-.tabela th {
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.tabela th,
-.tabela td {
-    border: 1px solid #000000;
-    text-align: left;
-    padding: 5px;
-    width: auto;
-    text-align: center;
-}
-
-.tabela thead {
-    background-color: #F0B35B;
-}
-
-.tabela input {
-    font-size: 16px;
-    text-align: center;
-}
-
-td i {
-    color: #000;
-    font-size: 25px;
-    margin: 5px;
-    border: 2px solid #000000;
-    padding: 10px;
-    border-radius: 50px;
     transition: all 0.3s;
-    background-color: #F0B35B;
+    background-color: var(--secundario);
+    color: #000;
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 20px;
 }
 
-td i:hover {
-    color: #fff;
+.btn-agendamento:hover {
+    background-color: #e6b570;
 }
 
-dialog {
-    justify-content: center;
-    margin: auto;
-    padding: 10%;
-    border-radius: 8px;
-    background-color: rgb(214, 214, 214);
 
-}
-
+/* CONTEUDO PRINCIPAL */
 body {
     background-color: var(--background);
     margin: 0;
@@ -217,6 +118,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     color: var(--light);
+    font-weight: bold;
     text-transform: capitalize;
     transition: all 0.3s;
     font-size: 20px;
@@ -236,7 +138,7 @@ nav ul li a:hover {
 .redes-sociais {
     color: #fff;
     transition: all 0.5s;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .redes-sociais:hover {
@@ -245,17 +147,24 @@ nav ul li a:hover {
 }
 
 .header-conteudo {
-    margin: 10% auto;
+    margin: 8% auto;
     max-width: 400px;
     justify-content: center;
     text-align: center;
 
 }
 
-.header-conteudo h1 {
+header .header-titulo {
+    font-family: "Freeman", sans-serif;
+    font-size: 50px;
+    justify-content: center;
     margin-bottom: 10px;
-    color: #fff;
+    color: #ffffff;
     display: block;
+}
+
+header .header-titulo span {
+    color: #eb9c2d;
 }
 
 .header-conteudo p {
@@ -263,10 +172,11 @@ nav ul li a:hover {
 }
 
 .btn-agendar {
-    padding: 10px;
+    padding: 15px;
     font-size: 16px;
     margin-top: 20px;
-    background-color: #F0B35B;
+    border-radius: 16px;
+    background-color: var(--secundario);
     color: black;
     font-weight: bold;
     cursor: pointer;
@@ -274,7 +184,51 @@ nav ul li a:hover {
 }
 
 .btn-agendar:hover {
-    background-color: #e6b570;
+    background-color: var(--secundario-1);
+}
+
+/* SOBRE NOS */
+.sobre {
+    display: flex;
+    flex-direction: column;
+    border: 8px outset var(--secundario);
+}
+
+.container-sobre {
+    display: flex;
+    width: 100%;
+}
+
+.sobre-left img {
+    width: 600;
+    height: 400px;
+    border-radius: 16px;
+}
+
+.sobre-left,
+.sobre-right {
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    margin: 80px;
+    text-align: center;
+}
+
+.sobre-right {
+    align-items: center;
+    text-align: center;
+
+}
+
+.sobre-right p {
+    margin: 15px 30px;
+    color: #fff;
+    font-size: 16;
+}
+
+.sobre-right h3 {
+    font-size: 20px;
+    color: #fff;
 }
 
 .servicos {
@@ -287,15 +241,17 @@ nav ul li a:hover {
     display: flex;
     justify-content: center;
     padding: 50px;
+    flex-wrap: wrap;
 }
 
 .card {
-    background-color: #F0B35B;
+    background-color: var(--secundario);
     flex-direction: column;
     margin: 20px;
     width: 300px;
     height: 300px;
     transition: all 0.3s ease-out;
+    overflow: hidden;
 }
 
 .card:hover {
@@ -314,6 +270,23 @@ nav ul li a:hover {
     color: #000;
 }
 
+.whatsapp-fixed {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    background-color: #25d366;
+    color: white;
+    font-size: 30px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
 footer {
     display: flex;
     text-align: center;
@@ -321,7 +294,7 @@ footer {
     justify-content: center;
     padding: 20px;
     margin-top: 50px;
-    background-color: #080b13
+    background-color: var(--background1)
 }
 
 footer p {

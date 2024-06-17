@@ -1,15 +1,16 @@
 <div class="agendar">
     <h1 class="titulo">Agendar</h1>
-    {{!-- <a href="/" style="margin: auto;"><img src="/img/logo-white.svg" alt="Logo da barbearia" width="100px";></a> --}}
+    {{!-- <a href="/" style="margin: auto;"><img src="/img/logo-white.svg" alt="Logo da barbearia" width="100px" ;></a>
+    --}}
     <div class="container">
         <form action="/agendar" method="post" class="form-agendar" id="form-agendar">
-        <h1 style="color: #fff;margin-bottom:10px">Preencha os campos</h1>
+            <h2 style="color: #fff;margin-bottom:10px">Preencha os campos</h2>
             <input type="text" name="nome" id="nome" placeholder="Nome completo:" required>
             <input type="tel" name="telefone" id="telefone" placeholder="Telefone:" required>
             <label for="data">Data</label>
             <input type="date" name="data" id="data" required>
             <label for="horario">Horário </label>
-            <select name="horario" id="horario" required>
+            <select name="horario" class="horario" required>
                 <option value="08:00">08:00</option>
                 <option value="09:00">09:00</option>
                 <option value="10:00">10:00</option>
@@ -22,13 +23,14 @@
                 <option value="17:00">17:00</option>
             </select>
 
-            <label for="servico"> Serviços </label required>
-            <select name="servico" id="servico">
+            <label for="servico"> Serviços </label>
+            <select name="servico" class="servico" required>
                 <option value="corte de cabelo">Corte de cabelo</option>
                 <option value="barba">Barba</option>
                 <option value="combo">Combo</option>
             </select>
-            <input type="submit" value="Agendar" class="btn-agendamento">
+            <input type="submit" value="Agendar" class="btn-agendamento"
+                onclick="return confirm('Confirma o  agendamento? ✅🕒');">
         </form>
     </div>
 </div>

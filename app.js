@@ -56,7 +56,6 @@ app.post('/agendar', function (req, res) {
 app.get('/admin', (req, res) => {
     Agendamento.findAll()
         .then(agendamentos => {
-
             const agendamentosFormatados = agendamentos.map(agendamento => {
                 const data = new Date(agendamento.data);
                 data.setMinutes(data.getMinutes() + data.getTimezoneOffset());
@@ -69,7 +68,6 @@ app.get('/admin', (req, res) => {
                     data: dataFormatada
                 };
             });
-
             res.render('admin', { agendamentos: agendamentosFormatados });
         })
         .catch(error => {
@@ -89,11 +87,43 @@ app.get('/deletar/:id', function (req, res) {
         })
 }),
 
-// ATUALIZAR AGENDAMENTOS DO BANCO DE DADOS
+    // ATUALIZAR AGENDAMENTOS DO BANCO DE DADOS
+    app.get('/editar/:id', (req, res) => {
+        const id = req.params.id;
+        Agendamento.findByPk(id)
+            .then(agendamento => {
 
-    
+                if (agendamento) {
+                    res.render('editar', { agendamento: agendamento });
+                } else {
+                    res.send('Agendamento não encontrado');
+                }
+            })
+            .catch(error => {
+                res.send('Erro ao buscar agendamento: ' + error.message);
+            });
+    });
 
-    app.listen(PORT, () => {
-        console.log(`Servidor funcionado na porta http://localhost:${PORT}`)
-        console.log(`Servidor funcionado na porta http://localhost:${PORT}/admin`)
-    })
+app.post('/editar/:id', (req, res) => {
+    const id = req.params.id;
+    Agendamento.update(
+        {
+            nome: req.body.nome,
+            telefone: req.body.telefone,
+            data: req.body.data,
+            horario: req.body.horario,
+            servico: req.body.servico
+        },
+        { where: { id: id } }
+    ).then(() => {
+        res.redirect('/admin');
+    }).catch(error => {
+        res.send('Erro ao atualizar o agendamento: ' + error.message);
+    });
+});
+
+
+app.listen(PORT, () => {
+    console.log(`Servidor funcionado na porta http://localhost:${PORT}`)
+    console.log(`Servidor funcionado na porta http://localhost:${PORT}/admin`)
+})

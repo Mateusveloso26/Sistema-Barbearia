@@ -1,0 +1,198 @@
+:root {
+    --background: #1e1e20;
+    --background1: rgb(19, 19, 19);
+    --secundario: #eb9c2d;
+    --secundario-1: #e7ab57;
+    --light: #fff;
+
+}
+
+/* PAGINA LOGIN  */
+.login {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    text-align: center;
+}
+
+.login-logo {
+    width: 25%;
+    margin: 10px 0;
+}
+
+.form-login {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: auto;
+    padding: 30px;
+    height: auto;
+    border-radius: 16px;
+    justify-content: center;
+    background-color: transparent;
+    border: 2px outset var(--secundario);
+
+}
+
+.form-login input {
+    margin: 10px 50px;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.form-login label {
+    color: #fff;
+    margin-top: 10px;
+}
+
+.btn-login {
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: var(--secundario);
+    color: #000;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.btn-login:hover {
+    background-color: var(--secundario-1);
+}
+
+/* PAGINA ADMIN */
+.admin {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-height: auto;
+}
+
+.header-admin {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 50px;
+}
+
+a .fa-arrow-left {
+    padding: 10px;
+    background-color: var(--secundario);
+    border-radius: 100%;
+}
+
+a .fa-arrow-left:hover {
+    padding: 10px;
+    background-color: #efc488;
+    border-radius: 100%;
+}
+
+
+.fa-arrow-left {
+    font-size: 25px;
+    color: #000000;
+}
+
+
+.admin h1 {
+    margin-bottom: 50px;
+}
+
+.tabela {
+    background-color: var(--light);
+    margin: 0 60px;
+}
+
+.tabela th {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.tabela th,
+.tabela td {
+    border: 1px solid #000000;
+    text-align: left;
+    padding: 5px;
+    width: auto;
+    text-align: center;
+}
+
+.tabela thead {
+    background-color: var(--secundario);
+}
+
+.tabela input {
+    font-size: 16px;
+    text-align: center;
+}
+
+td i {
+    color: #000;
+    font-size: 25px;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 50px;
+    transition: all 0.3s;
+    background-color: var(--secundario);
+}
+
+td i:hover {
+    color: #fff;
+}
+
+/* PAGINA EDITAR DADOS */
+.editar {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-height: auto;
+}
+
+.form-editar {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 10px;
+    width: 500px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #e6e5d6ed;
+    border-radius: 16px;
+}
+
+.form-editar label {
+    color: #000000;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.form-editar input,
+select,
+button {
+    width: 70%;
+    margin: 10px 0;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.btn-editar {
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: var(--secundario);
+    color: #000;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.btn-editar:hover {
+    background-color: var(--secundario-1);
+}
