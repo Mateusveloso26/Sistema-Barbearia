@@ -12,14 +12,7 @@ telefone.addEventListener('input', () => {
     if (valorAtual.length > 7) {
         numeroFormatado += `-${valorAtual.substring(7, 11)}`;
     }
-
     telefone.value = numeroFormatado; 
 });
 
 
-ScrollReveal().reveal('.scroll', {
-    origin: 'bottom ',
-    distance: '50px',
-    duration: 1500,
-    easing: 'ease-in-out'
-});
