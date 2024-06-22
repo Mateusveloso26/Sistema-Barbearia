@@ -11,21 +11,22 @@
 .login {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     height: 100vh;
     text-align: center;
 }
 
 .login-logo {
-    width: 25%;
+    width: 100px;
     margin: 10px 0;
 }
 
 .form-login {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 300px;
     margin: auto;
-    padding: 30px;
+    padding: 20px;
     height: auto;
     border-radius: 16px;
     justify-content: center;
@@ -35,14 +36,15 @@
 }
 
 .form-login input {
-    margin: 10px 50px;
+    margin: 10px auto;
     padding: 8px;
+    width: 80%;
     border-radius: 8px;
 }
 
 .form-login label {
     color: #fff;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .btn-login {
