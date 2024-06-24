@@ -11,7 +11,7 @@ const Agendamento = require('./models/Agendamento');
 require('./config/auth')(passport);
 
 const app = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3333;
 
 app.use(session({
     secret: process.env.CHAVE,

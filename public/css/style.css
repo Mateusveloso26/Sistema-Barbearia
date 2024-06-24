@@ -197,7 +197,7 @@ header .header-titulo span {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    background-color: var(--secundario1)
+    background-color: var(--background)
    
 }
 
@@ -253,6 +253,7 @@ header .header-titulo span {
     align-items: center;
     padding: 60px;
     text-align: center;
+    background-color: var(--secundario1);
 }
 
 .container {
@@ -307,7 +308,7 @@ header .header-titulo span {
     justify-content: center;
     padding: 20px;
     margin: 20px 0;
-    background-color: var(--secundario1);
+    background-color: var(--background);
     box-shadow: 0 -20px 10px -20px rgba(0, 0, 0, 0.5);
 
 }

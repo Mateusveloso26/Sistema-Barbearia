@@ -1,7 +1,7 @@
 <section class="editar">
     <div class="header-admin">
         <a href="/admin"><i class="fa-solid fa-arrow-left"></i></a>
-        <a href="/"><img src="/img/logo.svg" alt="Logo da barbearia" width="80px" ;></a>
+        <a href="/"><img src="/img/logo.svg" alt="Logo da barbearia" width="100px" ;></a>
     </div>
 
     <form action="/editar/{{agendamento.id}}" method="POST" class="form-editar">
@@ -22,6 +22,8 @@
         <select name="servico" id="servico" value="{{agendamento.servico}}" required>
             <option value="corte de cabelo">Corte de cabelo</option>
             <option value="barba">Barba</option>
+            <option value="sobrancelha">Sobrancelha</option>
+            <option value="pigmentação">Pigmentação</option>
             <option value="combo">Combo</option>
         </select>
         <button class="btn-editar" type="submit">Salvar</button>
