@@ -201,8 +201,7 @@ header .header-titulo span {
 .container-sobre {
     display: flex;
     width: 100%;
-    flex-wrap: flex;
-
+    flex-wrap: wrap;
 }
 
 .img-sobre {
@@ -231,7 +230,6 @@ header .header-titulo span {
     border-radius: 16px;
     padding: 10px;
     background-color: #3a3a3d;
-
 }
 
 .sobre-right p {
@@ -244,6 +242,7 @@ header .header-titulo span {
     font-size: 20px;
     color: #fff;
 }
+
 /* SERVIÇOS */
 .servicos {
     display: flex;
@@ -339,7 +338,7 @@ swiper-slide img {
     right: 0;
     background-color: rgba(0, 0, 0, 0.7);
     color: #ffffff;
-    padding: 5px;
+    padding: 10px;
     margin: 0;
     font-size: 16px;
 }

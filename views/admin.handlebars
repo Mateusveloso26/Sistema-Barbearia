@@ -2,6 +2,7 @@
     <div class="header-admin">
         <a href="/login"><i class="fa-solid fa-arrow-left"></i></a>
         <a href="/"><img src="/img/logo-white.svg" alt="Logo da barbearia" width="80px" ;></a>
+        <button  id="btn-sair">Sair</button>
     </div>
     <h1 class="titulo">Confira os agendamentos</h1>
     <table class="tabela">
@@ -34,4 +35,11 @@
             {{/each}}
         </tbody>
     </table>
+
 </section>
+
+<script>
+    document.getElementById('btn-sair').addEventListener('click', function () {
+        window.location.href = '/';
+    });
+</script>

@@ -5,10 +5,10 @@ const sequelize = new Sequelize('barbearia', 'root', 'root', {
     logging: false,
 })
 
-sequelize.authenticate().then(function () {
-    console.log("Conectado")
-}).catch(function (erro) {
-    console.log("Erro ao se conectar" + erro)
-}) 
+// sequelize.authenticate().then(function () {
+//     console.log("Conectado")
+// }).catch(function (erro) {
+//     console.log("Erro ao se conectar" + erro)
+// }) 
 
 module.exports = sequelize;

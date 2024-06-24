@@ -1,13 +1,15 @@
+const dotenv = require('dotenv').config();
 const express = require('express');
 const { engine } = require('express-handlebars');
-const dotenv = require('dotenv').config();
 const session = require('express-session');
 const passport = require('passport');
-const bcrypt = require('bcrypt');
-require('./config/auth')(passport);
 const bodyParser = require('body-parser');
-const Agendamento = require('./models/Agendamento');
+const bcrypt = require('bcryptjs');
+const sequelize = require('./config/db');
 const Usuario = require('./models/Usuario');
+const Agendamento = require('./models/Agendamento');
+require('./config/auth')(passport);
+
 const app = express();
 const PORT = process.env.PORT || 3002;
 
@@ -50,12 +52,18 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
+app.get('/logout', (req, res) => {
+    req.logout((err) => {
+        if (err) { return next(err); }
+        res.redirect('/');
+    });
+});
 
 // CRIAR USUARIO ADMIN
 async function criarUsuarioAdmin() {
     try {
-        const email = 'admin@gmail.com';
-        const senha = '123';
+        const email = 'teste@gmail.com';
+        const senha = 'teste';
         const hashSenha = await bcrypt.hash(senha, 10);
 
         const usuarioExistente = await Usuario.findOne({ where: { email } });
@@ -71,7 +79,7 @@ async function criarUsuarioAdmin() {
     }
 }
 
-criarUsuarioAdmin()
+// criarUsuarioAdmin();
 
 // CRIAR AGENDAMENTOS NO BANCO DE DADOS
 app.post('/agendar', function (req, res) {
@@ -82,14 +90,14 @@ app.post('/agendar', function (req, res) {
         horario: req.body.horario,
         servico: req.body.servico
     }).then(function () {
-        res.render('home', { Sucesso: "Agendamento concluido!" });
+        res.render('home', { Sucesso: "Agendamento concluído!" });
     }).catch(function (erro) {
-        res.render('agendar', { erro: "Erro: Agendamento não concluido - " + erro.message });
+        res.render('agendar', { erro: "Erro: Agendamento não concluído - " + erro.message });
     });
 });
 
 // LER OS AGENDAMENTOS CRIADOS NO BANCO DE DADOS
-app.get('/admin',authenticateMiddleware, (req, res) => {
+app.get('/admin', authenticateMiddleware, (req, res) => {
     Agendamento.findAll()
         .then(agendamentos => {
             const agendamentosFormatados = agendamentos.map(agendamento => {
@@ -100,7 +108,12 @@ app.get('/admin',authenticateMiddleware, (req, res) => {
                 const dia = String(data.getDate()).padStart(2, '0');
                 const dataFormatada = `${dia}/${mes}/${ano}`;
                 return {
-                    ...agendamento, data: dataFormatada
+                    id: agendamento.id,
+                    nome: agendamento.nome,
+                    telefone: agendamento.telefone,
+                    data: dataFormatada,
+                    horario: agendamento.horario,
+                    servico: agendamento.servico
                 };
             });
             res.render('admin', { agendamentos: agendamentosFormatados });
@@ -110,31 +123,35 @@ app.get('/admin',authenticateMiddleware, (req, res) => {
         });
 });
 
-// DELETAR AGENDAMENTOS NO BANCO DE DADOS
-app.get('/deletar/:id', authenticateMiddleware, function (req, res) {
-    Agendamento.destroy({ where: { id: req.params.id } })
-        .then(function () {
-            res.redirect('/admin');
-        }).catch(function (erro) {
-            res.send('Erro ao excluir o agendamento');
-        });
-});
 
-// ATUALIZAR AGENDAMENTOS DO BANCO DE DADOS
+// EXIBIR OS DADOS NO INPUT E ATUALIZAR OS DADOS
 app.get('/editar/:id', authenticateMiddleware, (req, res) => {
     const id = req.params.id;
     Agendamento.findByPk(id)
         .then(agendamento => {
             if (agendamento) {
-                res.render('editar', { agendamento: agendamento });
+
+                const plainAgendamento = agendamento.get({ plain: true });
+
+                const data = new Date(plainAgendamento.data);
+                data.setMinutes(data.getMinutes() + data.getTimezoneOffset());
+                const ano = data.getFullYear();
+                const mes = String(data.getMonth() + 1).padStart(2, '0');
+                const dia = String(data.getDate()).padStart(2, '0');
+                const dataFormatada = `${ano}-${mes}-${dia}`;
+
+                plainAgendamento.data = dataFormatada;
+
+                res.render('editar', { agendamento: plainAgendamento });
             } else {
-                res.send('Agendamento não encontrado');
+                res.status(404).send('Agendamento não encontrado');
             }
         })
         .catch(error => {
-            res.send('Erro ao buscar agendamento: ' + error.message);
+            res.status(500).send('Erro ao buscar agendamento: ' + error.message);
         });
 });
+
 
 app.post('/editar/:id', authenticateMiddleware, (req, res) => {
     const id = req.params.id;
@@ -150,11 +167,21 @@ app.post('/editar/:id', authenticateMiddleware, (req, res) => {
     ).then(() => {
         res.redirect('/admin');
     }).catch(error => {
-        res.send('Erro ao atualizar o agendamento: ' + error.message);
+        res.status(500).send('Erro ao atualizar o agendamento: ' + error.message);
     });
 });
 
+// DELETAR AGENDAMENTOS NO BANCO DE DADOS
+app.get('/deletar/:id', function (req, res) {
+    Agendamento.destroy({ where: { id: req.params.id } })
+        .then(function () {
+            res.redirect('/admin');
+        }).catch(function (erro) {
+            res.send('Erro ao excluir o agendamento');
+        });
+});
+
 app.listen(PORT, () => {
-    console.log(`Servidor funcionado na porta http://localhost:${PORT}`);
-    console.log(`Servidor funcionado na porta http://localhost:${PORT}/admin`);
+    console.log(`Servidor funcionando na porta http://localhost:${PORT}`);
+    console.log(`Servidor funcionando na porta http://localhost:${PORT}/admin`);
 });

@@ -92,10 +92,20 @@ a .fa-arrow-left:hover {
     border-radius: 100%;
 }
 
-
 .fa-arrow-left {
     font-size: 25px;
     color: #000000;
+}
+#btn-sair{
+    background-color: #eb9c2d;
+    width:60px;
+    padding: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+#btn-sair:hover{
+    background: #e7ab57;
 }
 
 

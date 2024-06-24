@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const localStrategy = require('passport-local').Strategy;
 const Usuario = require('../models/Usuario');
 
@@ -10,24 +10,24 @@ module.exports = function(passport) {
         try {
             console.log('Tentativa de autenticação para o email:', email);
 
+            // Procurar o usuário pelo email no banco de dados
             const user = await Usuario.findOne({ where: { email } });
 
             if (!user) {
-                console.log('Usuário não encontrado:', email);
+                console.log('Usuário não encontrado para o email:', email);
                 return done(null, false, { message: 'Usuário não encontrado.' });
             }
 
             console.log('Usuário encontrado:', user);
 
-            const senhaSemEspacos = senha.trim();
+            // Comparar a senha fornecida com a senha armazenada utilizando bcrypt
+            const isValidPassword = await bcrypt.compare(senha, user.senha);
 
-            const isValid = await bcrypt.compare(senhaSemEspacos, user.senha);
+            console.log('Senha digitada:', senha);
+            console.log('Senha armazenada no banco:', user.senha);
+            console.log('Comparação de senhas válida?', isValidPassword);
 
-            console.log('Senha digitada:', senhaSemEspacos);
-            console.log('Senha armazenada:', user.senha);
-            console.log('Comparação de senhas válida?', isValid);
-
-            if (!isValid) {
+            if (!isValidPassword) {
                 console.log('Senha incorreta para o email:', email);
                 return done(null, false, { message: 'Senha incorreta.' });
             }
@@ -40,4 +40,17 @@ module.exports = function(passport) {
         }
     }));
 
+    passport.serializeUser((user, done) => {
+        done(null, user.id); 
+    });
+
+    passport.deserializeUser(async (id, done) => {
+        try {
+            const user = await Usuario.findByPk(id);
+            done(null, user);
+        } catch (error) {
+            console.error('Erro ao desserializar o usuário:', error);
+            done(error, null);
+        }
+    });
 };
