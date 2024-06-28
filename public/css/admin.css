@@ -110,20 +110,21 @@ td i:hover {
 .form-editar {
     display: flex;
     flex-direction: column;
-    margin: auto;
-    padding: 10px;
+    margin:auto;
+    margin-bottom: 40px;
+    padding: 5px;
     width: 500px;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: #e6e5d6ed;
+    background-color: #e2e2dbed;
     border-radius: 16px;
 }
 
 .form-editar label {
     color: #000000;
     text-align: center;
-    margin-top: 5px;
+ 
 }
 
 .form-editar input,

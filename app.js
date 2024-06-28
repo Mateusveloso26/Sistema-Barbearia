@@ -40,7 +40,7 @@ function isAdminAuthenticated(req, res, next) {
     res.redirect('/loginAdmin');
 }
 
-function isClientAuthenticated(req, res, next) {
+function isClienteAuthenticated(req, res, next) {
     if (req.isAuthenticated()) return next();
     res.redirect('/loginUsuario');
 }
@@ -60,7 +60,7 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
-app.get('/agendar', (req, res) => {
+app.get('/agendar',isClienteAuthenticated, (req, res) => {
     res.render('agendar');
 });
 
@@ -86,8 +86,8 @@ app.get('/logout', (req, res) => {
 // CRIAR USUARIO ADMIN
 async function criarAdmin() {
     try {
-        const email = 'barber@gmail.com';
-        const senha = 'barber2024';
+        const email = 'admin@gmail.com';
+        const senha = '1234';
         const hashSenha = await bcrypt.hash(senha, 10);
 
         const adminExistente = await Admin.findOne({ where: { email } });
@@ -102,7 +102,7 @@ async function criarAdmin() {
         console.error('Erro ao criar usuário administrador:', error.message);
     }
 }
-// criarAdmin();
+criarAdmin();
 
 // CRIAR CLIENTES NO BANCO DE DADOS
 app.post('/loginUsuarioNovo', async (req, res) => {
@@ -127,7 +127,7 @@ app.post('/loginUsuarioNovo', async (req, res) => {
 });
 
 // CRIAR AGENDAMENTOS NO BANCO DE DADOS
-app.post('/agendar',isClientAuthenticated, function (req, res) {
+app.post('/agendar', function (req, res) {
     Agendamento.create({
         nome: req.body.nome,
         telefone: req.body.telefone,
