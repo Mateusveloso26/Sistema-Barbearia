@@ -1,14 +1,19 @@
 const dotenv = require('dotenv').config();
 const express = require('express');
 const { engine } = require('express-handlebars');
-const session = require('express-session');
-const passport = require('passport');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcryptjs');
+
 const sequelize = require('./config/db');
-const Usuario = require('./models/Usuario');
+const bcrypt = require('bcryptjs');
+
 const Agendamento = require('./models/Agendamento');
+const Cliente = require('./models/Cliente');
+const Admin = require('./models/Admin');
+
+const passport = require('passport');
+const session = require('express-session');
 require('./config/auth')(passport);
+require('./config/authCliente')(passport);
 
 const app = express();
 const PORT = process.env.PORT || 3333;
@@ -27,19 +32,30 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(express.static('public'));
 
-function authenticateMiddleware(req, res, next) {
+function isAdminAuthenticated(req, res, next) {
     if (req.isAuthenticated()) return next();
-    res.redirect('/login');
+    res.redirect('/loginAdmin');
 }
 
-app.post('/login', passport.authenticate('local', {
+function isClientAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) return next();
+    res.redirect('/loginUsuario');
+}
+
+app.post('/loginAdmin', passport.authenticate('admin-local', {
     successRedirect: '/admin',
-    failureRedirect: '/login',
+    failureRedirect: '/loginAdmin',
     failureFlash: false
 }));
 
+app.post('/loginUsuario', passport.authenticate('cliente-local', {
+    successRedirect: '/agendar',
+    failureRedirect: '/loginUsuario',
+    failureFlash: false
+}));
 app.get('/', (req, res) => {
     res.render('home');
 });
@@ -48,8 +64,16 @@ app.get('/agendar', (req, res) => {
     res.render('agendar');
 });
 
-app.get('/login', (req, res) => {
-    res.render('login');
+app.get('/loginAdmin', (req, res) => {
+    res.render('loginAdmin');
+});
+
+app.get('/loginUsuario', (req, res) => {
+    res.render('loginUsuario');
+});
+
+app.get('/loginUsuarioNovo', (req, res) => {
+    res.render('loginUsuarioNovo');
 });
 
 app.get('/logout', (req, res) => {
@@ -60,29 +84,50 @@ app.get('/logout', (req, res) => {
 });
 
 // CRIAR USUARIO ADMIN
-async function criarUsuarioAdmin() {
+async function criarAdmin() {
     try {
-        const email = 'teste@gmail.com';
-        const senha = 'teste';
+        const email = 'barber@gmail.com';
+        const senha = 'barber2024';
         const hashSenha = await bcrypt.hash(senha, 10);
 
-        const usuarioExistente = await Usuario.findOne({ where: { email } });
-        if (usuarioExistente) {
+        const adminExistente = await Admin.findOne({ where: { email } });
+        if (adminExistente) {
             console.log('Usuário administrador já existe.');
             return;
         }
 
-        await Usuario.create({ email, senha: hashSenha });
+        await Admin.create({ email, senha: hashSenha });
         console.log('Usuário administrador criado com sucesso.');
     } catch (error) {
         console.error('Erro ao criar usuário administrador:', error.message);
     }
 }
+// criarAdmin();
 
-// criarUsuarioAdmin();
+// CRIAR CLIENTES NO BANCO DE DADOS
+app.post('/loginUsuarioNovo', async (req, res) => {
+    const { nome, email, cpf, telefone, senha } = req.body;
+
+    try {
+        // Verifique se o usuário já existe pelo email
+        const usuarioExistente = await Cliente.findOne({ where: { email } });
+        if (usuarioExistente) {
+            return res.render('loginUsuarioNovo', { errorMessage: 'Email já cadastrado.' });
+        }
+        // Crie um novo usuário
+        const hashSenha = await bcrypt.hash(senha, 10);
+        await Cliente.create({ nome, email, cpf, telefone, senha: hashSenha });
+
+        // Redirecione para a página de login após criar a conta com sucesso
+        res.render('loginUsuario', { Sucesso: 'Conta criada com sucesso!' });
+    } catch (error) {
+        console.error('Erro ao criar usuário:', error.message);
+        res.render('loginUsuarioNovo', { erro: 'Erro ao criar usuário. Tente novamente mais tarde.' });
+    }
+});
 
 // CRIAR AGENDAMENTOS NO BANCO DE DADOS
-app.post('/agendar', function (req, res) {
+app.post('/agendar',isClientAuthenticated, function (req, res) {
     Agendamento.create({
         nome: req.body.nome,
         telefone: req.body.telefone,
@@ -97,7 +142,7 @@ app.post('/agendar', function (req, res) {
 });
 
 // LER OS AGENDAMENTOS CRIADOS NO BANCO DE DADOS
-app.get('/admin', authenticateMiddleware, (req, res) => {
+app.get('/admin', isAdminAuthenticated, (req, res) => {
     Agendamento.findAll()
         .then(agendamentos => {
             const agendamentosFormatados = agendamentos.map(agendamento => {
@@ -123,9 +168,8 @@ app.get('/admin', authenticateMiddleware, (req, res) => {
         });
 });
 
-
 // EXIBIR OS DADOS NO INPUT E ATUALIZAR OS DADOS
-app.get('/editar/:id', authenticateMiddleware, (req, res) => {
+app.get('/editar/:id', isAdminAuthenticated, (req, res) => {
     const id = req.params.id;
     Agendamento.findByPk(id)
         .then(agendamento => {
@@ -152,8 +196,7 @@ app.get('/editar/:id', authenticateMiddleware, (req, res) => {
         });
 });
 
-
-app.post('/editar/:id', authenticateMiddleware, (req, res) => {
+app.post('/editar/:id', isAdminAuthenticated, (req, res) => {
     const id = req.params.id;
     Agendamento.update(
         {
@@ -172,7 +215,7 @@ app.post('/editar/:id', authenticateMiddleware, (req, res) => {
 });
 
 // DELETAR AGENDAMENTOS NO BANCO DE DADOS
-app.get('/deletar/:id', function (req, res) {
+app.get('/deletar/:id',isAdminAuthenticated, function (req, res) {
     Agendamento.destroy({ where: { id: req.params.id } })
         .then(function () {
             res.redirect('/admin');
@@ -181,7 +224,10 @@ app.get('/deletar/:id', function (req, res) {
         });
 });
 
+
 app.listen(PORT, () => {
     console.log(`Servidor funcionando na porta http://localhost:${PORT}`);
     console.log(`Servidor funcionando na porta http://localhost:${PORT}/admin`);
+    console.log(`Servidor funcionando na porta http://localhost:${PORT}/agendar`);
+    console.log(`Servidor funcionando na porta http://localhost:${PORT}/loginUsuario`);
 });

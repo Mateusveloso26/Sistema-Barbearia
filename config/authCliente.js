@@ -1,9 +1,9 @@
 const bcrypt = require('bcryptjs');
 const localStrategy = require('passport-local').Strategy;
-const Admin = require('../models/Admin');
+const Cliente = require('../models/Cliente');
 
 module.exports = function (passport) {
-    passport.use('admin-local', new localStrategy({
+    passport.use('cliente-local',new localStrategy({
         usernameField: 'email',
         passwordField: 'senha'
     }, async (email, senha, done) => {
@@ -11,7 +11,7 @@ module.exports = function (passport) {
             console.log('Tentativa de autenticação para o email:', email);
 
             // Procurar o usuário pelo email no banco de dados
-            const user = await Admin.findOne({ where: { email } });
+            const user = await Cliente.findOne({ where: { email } });
 
             if (!user) {
                 console.log('Usuário não encontrado para o email:', email);
@@ -46,7 +46,7 @@ module.exports = function (passport) {
 
     passport.deserializeUser(async (id, done) => {
         try {
-            const user = await Admin.findByPk(id);
+            const user = await Cliente.findByPk(id);
             done(null, user);
         } catch (error) {
             console.error('Erro ao desserializar o usuário:', error);

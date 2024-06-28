@@ -24,11 +24,78 @@
     color: var(--light);
     justify-content: center;
     text-align: center;
-    margin: 20px 40px 0 0;
+    margin: 40px;
     font-size: 39px;
-    font-weight: bolder;
+    font-weight: bold;
     text-transform: uppercase;
-    width: 100%;
+}
+
+/* FORM USUARIO / USUARIO NOVO / ADMIN */
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+    text-align: center;
+}
+
+.login-logo {
+    width: 150px;
+    margin: 10px 0;
+}
+
+.form-login {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    margin: 50px auto;
+    padding:10px;
+    height: auto;
+    border-radius: 16px;
+    justify-content: center;
+    background-color: transparent;
+    border: 4px outset var(--secundario);
+
+}
+
+
+.form-login input {
+    margin: 10px auto;
+    padding: 8px;
+    width: 90%;
+    border-radius: 8px;
+}
+
+.form-login label {
+    color: #fff;
+    margin-top: 5px;
+}
+
+.btn-login {
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: var(--secundario);
+    color: #000;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.btn-login:hover {
+    background-color: var(--secundario-1);
+}
+
+.form-login a {
+    color: #fff;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: all 0.2s;
+}
+
+.form-login a:hover {
+    color: #dbdada;
 
 }
 
@@ -44,19 +111,20 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    padding: 30px;
-    width: 500px;
+    margin-bottom: 50px;
+    padding: 10px;
+    width: 450px;
     justify-content: center;
     align-items: center;
     text-align: center;
-    border: 2px outset var(--secundario);
+    border: 4px outset var(--secundario);
     border-radius: 16px;
 }
 
 .form-agendar input,
 .horario,
 .servico {
-    width: 70%;
+    width: 80%;
     margin: 10px 0;
     padding: 10px;
     border-radius: 8px;
@@ -64,8 +132,8 @@
 
 .form-agendar label {
     color: var(--light);
-    margin-top: 5px;
-    font-weight: bold;
+    margin-top: 2px;
+    font-weight: 400;
 }
 
 .btn-agendamento {
@@ -85,21 +153,22 @@
 
 /* CONTEUDO PRINCIPAL */
 body {
-    background-color: var(--background);
-    margin: 0;
+   
+background-color: var(--background);
 }
 
 header {
     background-image: url("/img/banner.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position:  top center;
     height: 100vh;
 }
 
 .logo {
     width: 120px;
     height: auto;
-   
+
 }
 
 nav {
@@ -177,13 +246,15 @@ header .header-titulo span {
 }
 
 .btn-agendar {
-    padding: 15px;
+    padding: 4%;
     font-size: 16px;
     margin-top: 30px;
+    width: 60%;
     border-radius: 4px;
     background-color: var(--secundario);
     color: black;
     font-weight: bold;
+    border: none;
     cursor: pointer;
     text-decoration: none;
 }
@@ -198,7 +269,6 @@ header .header-titulo span {
     flex-direction: column;
     flex-wrap: wrap;
     background-color: var(--background)
-   
 }
 
 .container-sobre {
@@ -267,7 +337,7 @@ header .header-titulo span {
     background-color: var(--secundario);
     width: 300px;
     height: 300px;
-    border-radius: 8px;
+    border-radius: 16px;
     overflow: hidden;
     margin: 20px;
     transition: transform 0.3s ease;
@@ -307,15 +377,14 @@ header .header-titulo span {
     flex-direction: column;
     justify-content: center;
     padding: 20px;
-    margin: 20px 0;
     background-color: var(--background);
     box-shadow: 0 -20px 10px -20px rgba(0, 0, 0, 0.5);
 
 }
 
 swiper-container {
-    width: 80%;
-    height: 80%;
+    width: 900px;
+    height: auto;
     margin: auto;
 }
 
@@ -349,7 +418,7 @@ swiper-slide img {
 
 .whatsapp-fixed {
     position: fixed;
-    left: 20px;
+    right: 20px;
     bottom: 20px;
     background-color: #25d366;
     color: white;
@@ -375,11 +444,10 @@ footer {
     justify-content: center;
     padding: 20px;
     flex-direction: column;
-    margin-top: 50px;
     background-color: var(--background1)
 }
 
-footer .fa-arrow-up{
+footer .fa-arrow-up {
     color: #fff;
     font-size: 30px;
     cursor: pointer;

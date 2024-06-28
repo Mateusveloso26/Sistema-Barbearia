@@ -1,34 +1,40 @@
 @media screen and (max-width:767px) {
-    main{
+    main {
         width: 100%;
         height: auto;
     }
+
     .titulo {
         font-size: 29px;
     }
 
-    header {
-        background-image: url("/img/banner.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
+
+    .header-conteudo {
+        margin: 60px;
     }
+
+    header .header-titulo {
+        font-family: "Freeman", sans-serif;
+        font-size: 35px;
+        justify-content: center;
+        margin-bottom: 30px;
+        color: #ffffff;
+        display: block;
+    }
+
     header nav ul {
         display: none;
     }
+
     .container-sobre {
         flex-direction: column;
         align-items: center;
-        
     }
 
-    .img-sobre {
-        width: 100%;
-        height: auto;
-    }
 
     .sobre-left,
     .sobre-right {
-        width: 100%;
+        width: 90%;
         margin: 20px 0;
     }
 
@@ -40,5 +46,15 @@
     .sobre-right h3 {
         font-size: 18px;
     }
+   
+}
 
+@media screen and (min-width:1440px) {
+    .login {
+        height: 100vh;
+    }
+    .header-conteudo {
+        margin: 13% auto;
+       
+    }
 }

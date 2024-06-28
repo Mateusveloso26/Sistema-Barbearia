@@ -7,61 +7,6 @@
 
 }
 
-/* PAGINA LOGIN  */
-.login {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-}
-
-.login-logo {
-    width: 150px;
-    margin: 10px 0;
-}
-
-.form-login {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    margin: auto;
-    padding: 20px;
-    height: auto;
-    border-radius: 16px;
-    justify-content: center;
-    background-color: transparent;
-    border: 2px outset var(--secundario);
-
-}
-
-.form-login input {
-    margin: 10px auto;
-    padding: 8px;
-    width: 80%;
-    border-radius: 8px;
-}
-
-.form-login label {
-    color: #fff;
-    margin-top: 5px;
-}
-
-.btn-login {
-    cursor: pointer;
-    transition: all 0.3s;
-    background-color: var(--secundario);
-    color: #000;
-    border: none;
-    font-weight: 600;
-    font-size: 16px;
-    padding: 10px;
-    margin-top: 20px;
-}
-
-.btn-login:hover {
-    background-color: var(--secundario-1);
-}
 
 /* PAGINA ADMIN */
 .admin {

@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db'); 
 const bcrypt = require('bcryptjs');
 
-const Usuario = sequelize.define('Usuario', {
+const Admin = sequelize.define('Admin', {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -17,5 +17,5 @@ const Usuario = sequelize.define('Usuario', {
     }
 })
 
-// Usuario.sync({ force: true }); 
-module.exports = Usuario;
+// Admin.sync({ force: true });
+module.exports = Admin;
