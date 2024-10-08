@@ -5,7 +5,7 @@ Bem-vindo ao sistema de agendamentos da barbearia! Este projeto foi desenvolvido
 
 ## Tecnologias Utilizadas
 - Front-end: HTML, CSS, JavaScript, Swiper.js
-- Back-end: Node.js, Express, Express-handlebars, express-session, passport, bcryptjs, dotenv
+- Back-end: Node.js, Express, body-parser, Express-handlebars, express-session, passport, bcryptjs, dotenv
 - Banco de Dados: MySQL
 
 ## Funcionalidades
