@@ -2,6 +2,13 @@
     main {
         width: 100%;
         height: auto;
+    } 
+    header{
+        margin: auto;
+    }
+    .btn-agendar{
+        width: 100%;
+        padding: 12px;
     }
 
     .titulo {
