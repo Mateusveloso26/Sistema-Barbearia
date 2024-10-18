@@ -5,7 +5,7 @@
     </div>
 
     <form action="/editar/{{agendamento.id}}" method="POST" class="form-editar">
-        <h2>Editar Dados</h2>
+        <h2 style="color: white;">Editar Dados</h2>
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" value="{{agendamento.nome}}" required>
 
@@ -28,4 +28,5 @@
         </select>
         <button class="btn-editar" type="submit">Salvar</button>
     </form>
+    
 </section>

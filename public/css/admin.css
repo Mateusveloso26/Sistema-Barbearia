@@ -103,26 +103,24 @@ td i:hover {
 .editar {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    max-height: auto;
+    height: 100vh;
 }
 
 .form-editar {
     display: flex;
     flex-direction: column;
-    margin:auto;
-    margin-bottom: 40px;
-    padding: 5px;
-    width: 500px;
+    margin:auto; 
+    padding: 6px;
+
+    width: 450px;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: #e2e2dbed;
     border-radius: 16px;
 }
 
 .form-editar label {
-    color: #000000;
+    color: #ffffff;
     text-align: center;
  
 }

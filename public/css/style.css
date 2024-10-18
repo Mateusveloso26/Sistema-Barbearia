@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Freeman&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
 
 * {
     padding: 0;
@@ -7,9 +6,8 @@
     outline: none;
     border: none;
     box-sizing: border-box;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Cinzel", sans-serif;
 }
-
 
 
 :root {
@@ -107,15 +105,21 @@
     display: flex;
     flex-direction: column;
     height: auto;
-    min-height: 100vh;
+    height: 100vh;
+}
+.container-agendar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 .form-agendar {
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-bottom: 50px;
-    padding: 10px;
+    padding: 6px;
     width: 450px;
     justify-content: center;
     align-items: center;
@@ -162,10 +166,14 @@ body {
 header {
     background-image: url("/img/banner.jpg");
     background-repeat: no-repeat;
-    align-items: center;
     background-size: cover;
     background-position: top center;
-    height: 100vh;
+    height: auto;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
 }
 
 .logo {
@@ -176,20 +184,21 @@ header {
 
 nav {
     display: flex;
-    text-align: center;
-    justify-content: space-around;
+    justify-content: space-around; 
+    width: 100%; 
+    padding: 10px 20px; 
 }
 
 nav ul {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin: 0 20px;
+    gap: 30px;
+    margin: 0; 
 }
-
 
 nav ul li {
     list-style-type: none;
+   
 }
 
 nav ul li a {
@@ -199,7 +208,6 @@ nav ul li a {
     text-transform: capitalize;
     transition: all 0.3s;
     font-size: 20px;
-    margin: 0 15px;
 }
 
 nav ul li a:hover {
@@ -224,19 +232,18 @@ nav ul li a:hover {
 }
 
 .header-conteudo {
-    margin: 8% auto;
-    max-width: 400px;
-    justify-content: center;
-    text-align: center;
+    margin: 0; /* Remover margens */
+    max-width: 600px; /* Limitar a largura do conteúdo */
+    text-align: center; /* Centralizar texto */
 }
 
 header .header-titulo {
-    font-family: "Freeman", sans-serif;
-    font-size: 50px;
-    justify-content: center;
+    width: 100%;
+    font-size: 50px; 
     margin-bottom: 10px;
     color: #ffffff;
     display: block;
+    line-height: 1.2; 
 }
 
 header .header-titulo span {
@@ -251,7 +258,6 @@ header .header-titulo span {
     padding: 14px;
     font-size: 16px;
     margin-top: 30px;
-    width: 60%;
     border-radius: 6px;
     background-color: var(--secundario);
     color: black;
@@ -259,13 +265,11 @@ header .header-titulo span {
     border: none;
     text-transform: uppercase;
     cursor: pointer;
-    text-decoration: none;
 }
 
 .btn-agendar:hover {
     background-color: var(--secundario-1);
 }
-
 /* SOBRE NOS */
 .sobre {
     display: flex;
@@ -339,9 +343,9 @@ header .header-titulo span {
 
 .card {
     background-color: var(--secundario);
-    width: 300px;
-    height: 300px;
-    border-radius: 16px;
+    width: 400px;
+    height: auto;
+    border-radius: 8px;
     overflow: hidden;
     margin: 20px;
     transition: transform 0.3s ease;
@@ -369,7 +373,7 @@ header .header-titulo span {
 
 .card-info p {
     margin: 0;
-    font-weight: 700;
+    font-weight: 500;
     color: #000;
     font-size: 1.2rem;
     line-height: 1.5;

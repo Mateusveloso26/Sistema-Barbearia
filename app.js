@@ -1,4 +1,4 @@
-const dotenv = require('dotenv').config();
+
 const express = require('express');
 const { engine } = require('express-handlebars');
 const bodyParser = require('body-parser');
@@ -13,7 +13,7 @@ const Admin = require('./models/Admin');
 const passport = require('passport');
 const session = require('express-session');
 require('./config/auth')(passport);
-require('./config/authCliente')(passport);
+
 
 const app = express();
 const PORT = process.env.PORT || 3333;
@@ -40,10 +40,6 @@ function isAdminAuthenticated(req, res, next) {
     res.redirect('/loginAdmin');
 }
 
-function isClienteAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) return next();
-    res.redirect('/loginUsuario');
-}
 
 app.post('/loginAdmin', passport.authenticate('admin-local', {
     successRedirect: '/admin',
@@ -51,16 +47,11 @@ app.post('/loginAdmin', passport.authenticate('admin-local', {
     failureFlash: false
 }));
 
-app.post('/loginUsuario', passport.authenticate('cliente-local', {
-    successRedirect: '/agendar',
-    failureRedirect: '/loginUsuario',
-    failureFlash: false
-}));
 app.get('/', (req, res) => {
     res.render('home');
 });
 
-app.get('/agendar',isClienteAuthenticated, (req, res) => {
+app.get('/agendar', (req, res) => {
     res.render('agendar');
 });
 
@@ -215,7 +206,7 @@ app.post('/editar/:id', isAdminAuthenticated, (req, res) => {
 });
 
 // DELETAR AGENDAMENTOS NO BANCO DE DADOS
-app.get('/deletar/:id',isAdminAuthenticated, function (req, res) {
+app.get('/deletar/:id', isAdminAuthenticated, function (req, res) {
     Agendamento.destroy({ where: { id: req.params.id } })
         .then(function () {
             res.redirect('/admin');
@@ -228,6 +219,5 @@ app.get('/deletar/:id',isAdminAuthenticated, function (req, res) {
 app.listen(PORT, () => {
     console.log(`Servidor funcionando na porta http://localhost:${PORT}`);
     console.log(`Servidor funcionando na porta http://localhost:${PORT}/admin`);
-    console.log(`Servidor funcionando na porta http://localhost:${PORT}/agendar`);
     console.log(`Servidor funcionando na porta http://localhost:${PORT}/loginUsuario`);
 });
